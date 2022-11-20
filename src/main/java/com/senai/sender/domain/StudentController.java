@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/students")
 public class StudentController {
 
+    private final RabbitSender rabbitSender;
     @Autowired
-    private RabbitSender rabbitSender;
+    public StudentController(RabbitSender rabbitSender) {
+        this.rabbitSender = rabbitSender;
+    }
 
     @PostMapping
     public void sendMessage(@RequestBody Student student) {
